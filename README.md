@@ -58,6 +58,24 @@ exports.config = {
 	}
 }
 ```
+
+By default protractor-screenshots create a folder of screenshots for each webbrowser using this following name structure:
+```
+capabilityString = platform + '-' + browserName + '-' + version
+```
+But you can personalize the 'capabilityString' using the following parameter:
+```
+exports.config = {
+	params: {
+		screenshotsCapabilityFn: function(browserName, platform, version) {
+			// Take only the major version number
+			var majorVersion = version.split('.')[0];
+			return platform + '-' + browserName + '-' + majorVersion;
+		}
+	}
+}
+```
+
 Entries are matched to capabilities in order of their appearance in this list.
 For instance, if the current browser has the capability 'phantomjs', it will
 match the first size configuration in the above list. If there was a later

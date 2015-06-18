@@ -8,6 +8,13 @@ _ = require 'lodash'
 
 capabilityString = ''
 capabilities = null
+
+disableScreenshots = browser.params['disableScreenshots']
+screenshotBase = browser.params['screenshotsBasePath'] || '.'
+screenshotSizes = browser.params['screenshotSizes']
+screenshotCapabilityFn = browser.params['screenshotsCapabilityFn'] or (browserName, platform, version) ->
+  "#{platform}-#{browserName}-#{version}"
+
 browser.getCapabilities().then (returnValue) ->
     capabilities = returnValue.caps_
 
@@ -15,12 +22,7 @@ browser.getCapabilities().then (returnValue) ->
     platform = returnValue.caps_.platform.toLowerCase()
     version = returnValue.caps_.version.toLowerCase()
 
-    capabilityString = "#{platform}-#{browserName}-#{version}"
-
-disableScreenshots = browser.params['disableScreenshots']
-screenshotBase = browser.params['screenshotsBasePath'] || '.'
-
-screenshotSizes = browser.params['screenshotSizes'] 
+    capabilityString = screenshotCapabilityFn(browserName, platform, version)
 
 matchesCapabilities = (other) ->
     excludeKeys = ['sizes']
