@@ -11,7 +11,7 @@ var screenshots = require('protractor-screenshots');
 
 During a test, run
 ```
-screenshots.checkScreenshot('my-screenshot-name')
+screenshots.checkScreenshot(this, 'my-screenshot-name')
 ```
 
 If screenshots do not exist, or do not match, test output will show
@@ -57,6 +57,15 @@ exports.config = {
 		]
 	}
 }
+```
+
+You can modify allowed change in screenshots by percentage:
+```
+exports.config = {
+	params: {
+		desiredPercentage: 1.5
+	}
+};
 ```
 Entries are matched to capabilities in order of their appearance in this list.
 For instance, if the current browser has the capability 'phantomjs', it will
