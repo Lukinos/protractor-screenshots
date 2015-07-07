@@ -24,7 +24,7 @@ browser.getCapabilities().then (returnValue) ->
 
     capabilityString = screenshotCapabilityFn(browserName, platform, version)
 
-desiredPercentage = browser.params['desiredPercentage'] || '0.00'
+screenshotDesiredPercentage = browser.params['screenshotDesiredPercentage'] || '0.00'
 
 matchesCapabilities = (other) ->
     excludeKeys = ['sizes']
@@ -74,7 +74,7 @@ matchScreenshot = (spec, screenshotName, screenshot) ->
         resemble(new Buffer(screenshot.data, 'base64'))
         .compareTo(data)
         .onComplete (result) ->
-            if result.misMatchPercentage <= desiredPercentage
+            if result.misMatchPercentage <= screenshotDesiredPercentage
                 deferred.resolve { match: true }
             else
                 deferred.resolve {

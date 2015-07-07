@@ -80,7 +80,7 @@ You can modify allowed change in screenshots by percentage:
 ```
 exports.config = {
 	params: {
-		desiredPercentage: 1.5
+		screenshotDesiredPercentage: 1.5
 	}
 };
 ```
